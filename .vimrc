@@ -81,14 +81,12 @@ let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 
 "config for ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+set rtp+=~/.vim/custom_snippets
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/]\.(git|hg|svn)$',
     \ 'file': '\v\.(exe|so|dll|pyc)$'
     \ }
-
-let $PYTHONPATH='/Library/WebServer/Documents/python/projects/RekognitionAnnotationScripts/'
 
 " youcompleteme coinfig
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -101,6 +99,7 @@ colorscheme solarized
 " Relative Row Numbers
 set relativenumber
 
+let g:UltiSnipsSnippetDirectories=["custom_snippets", "UltiSnips"]
 let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
