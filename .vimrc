@@ -60,16 +60,16 @@ set expandtab
 execute pathogen#infect()
 
 "config for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_check_on_open = 'ra' 
-let g:syntastic_aggregate_errors = 1
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_check_on_open = 'ra' 
+"let g:syntastic_aggregate_errors = 1
+""
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeIgnore = ['\.pyc$']
@@ -89,7 +89,8 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 " youcompleteme coinfig
-let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_server_keep_logfile = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " theme config
 set background=dark
@@ -104,3 +105,15 @@ let g:UltiSnipsExpandTrigger="<c-e>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEnableSnipMate = 0
+
+
+" copy paste across vim instance
+vmap <silent> ,y :w! /tmp/vitmp<CR>                                                                   
+nmap <silent> ,p :r! cat /tmp/vitmp<CR>
+
+set foldlevel=99 
+
+let g:ale_linters = {
+\  'python': ['pylint'],
+\  'javascript': ['eslint']
+\}

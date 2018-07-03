@@ -1,5 +1,14 @@
 # vim_setting
 1. Set up configs:
-    ln -s /Library/WebServer/Documents/setting/vim_setting ~/.vim
-    ln -s /Library/WebServer/Documents/setting/vim_setting/.vimrc ~/.vimrc
+    ln -s {local_path_for_the_files} ~/.vim
+    ln -s {local_path_for_the_files}.vimrc ~/.vimrc
 
+2. pull submodules
+    git submodules update
+
+3. install ctags
+    Debian: sudo apt-get install exuberant-ctags
+    Red Hat: sudo yum install ctags
+
+4. install YouCompleteMe
+    follow: https://github.com/Valloric/YouCompleteMe
