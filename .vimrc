@@ -33,7 +33,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'itchyny/lightline.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/neocomplete'
 Plugin 'w0rp/ale'
 Plugin 'Yggdroot/indentLine'
 Plugin 'scrooloose/nerdcommenter'
@@ -41,6 +41,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'SirVer/ultisnips'
 Plugin 'epilande/vim-react-snippets'
 Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
 Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
@@ -62,13 +63,14 @@ imap qw jki
 imap qa jkla
 
 let mapleader = "\<Space>"
-syntax enable
+syntax on
 set encoding=utf-8
 
 set autoindent
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -86,9 +88,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeIgnore = ['\.pyc$']
 map <F7> :NERDTreeToggle<CR>
 
-nmap <F8> :TagbarToggle<CR>
-
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_ctags_bin='/usr/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 
 "config for ctrlp
@@ -98,17 +98,6 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|offline\-module\-cache))$',
     \ 'file': '\v\.(exe|so|dll|pyc|DS_STORE)$'
     \ }
-
-" youcompleteme coinfig
-let g:ycm_server_keep_logfile = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-" Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_enable_diagnostic_highlighting = 0
-" Don't show YCM's preview window [ I find it really annoying ]
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
 
 " theme config
 set background=dark
@@ -169,6 +158,8 @@ highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
 let g:ale_sign_error = 'X' " could use emoji
 let g:ale_sign_warning = '?' " could use emoji
 let g:ale_statusline_format = ['X %d', '? %d', '']
+let g:ale_open_list = 1
+autocmd QuitPre * if empty(&bt) | lclose | endif
 
 " %linter% is the name of the linter that provided the message
 " " %s is the error or warning message
@@ -176,3 +167,33 @@ let g:ale_echo_msg_format = '%linter% says %s'
 " " Map keys to navigate between lines with errors and warnings.
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
+
+" disable beeping and flashing when error occors
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+let g:neocomplete#enable_at_startup = 1
+inoremap <expr><Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
+
+let g:tagbar_type_javascript = {
+    \'ctagstype': 'javascript',
+    \'kinds': [
+        \ 'V:Variables',
+        \ 'A:Array',
+        \ 'C:Class',
+        \ 'E:Export',
+        \ 'F:Function',
+        \ 'G:Generator',
+        \ 'I:Import',
+        \ 'M:Method',
+        \ 'O:Object',
+        \ 'T:Tag',
+        \ 'P:Preperty'
+    \]
+\}
+nmap <F8> :TagbarToggle<CR>
+
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
