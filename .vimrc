@@ -1,3 +1,27 @@
+set showcmd " Show (partial) command in status line.
+set showmatch " Show matching brackets.
+
+" Turn off modelines
+set modelines=0
+
+" Automatically wrap text that extends beyond the screen length.
+set wrap
+
+" Vim's auto indentation feature does not work properly with text copied from
+" outisde of Vim. Press the <F2> key to toggle paste mode on/off.
+nnoremap <F2> :set invpaste paste?<CR>
+imap <F2> <C-O>:set invpaste paste?<CR>
+set pastetoggle=<F2>
+
+set textwidth=79
+set formatoptions=tcqrn1
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set noshiftround
+set autoindent
+
 set t_Co=256
 set laststatus=2
 set nocompatible              " be iMproved, required
@@ -66,10 +90,6 @@ let mapleader = "\<Space>"
 syntax on
 set encoding=utf-8
 
-set autoindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
 
 
 "config for syntastic
@@ -88,7 +108,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeIgnore = ['\.pyc$']
 map <F7> :NERDTreeToggle<CR>
 
-let g:tagbar_ctags_bin='/usr/bin/ctags'  " Proper Ctags locations
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 
 "config for ctrlp

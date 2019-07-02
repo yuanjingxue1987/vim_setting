@@ -10,5 +10,6 @@
     Debian: sudo apt-get install exuberant-ctags
     Red Hat: sudo yum install ctags
 
-4. install YouCompleteMe
-    follow: https://github.com/Valloric/YouCompleteMe
+4. if cannot find syntac.vim, you need to execute the following command to link it:
+    ln -s {local_path_for_the_vim_share_folder}/vim /usr/local/share/vim
+    
