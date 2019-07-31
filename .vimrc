@@ -4,6 +4,27 @@ set showmatch " Show matching brackets.
 " Turn off modelines
 set modelines=0
 
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+
+
 " Automatically wrap text that extends beyond the screen length.
 set wrap
 
@@ -21,66 +42,47 @@ set softtabstop=4
 set expandtab
 set noshiftround
 set autoindent
+" share clipboard
+set clipboard=unnamed
 
-set t_Co=256
 set laststatus=2
-set nocompatible              " be iMproved, required
 "filetype plugin on
 filetype plugin indent on     " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if &compatible
+  set nocompatible
+endif
+" Add the dein installation directory into runtimepath
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
-" let Vundle manage Vundle, required
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
+  if !has('nvim')
+    call dein#add('roxma/nvim-yarp')
+    call dein#add('roxma/vim-hug-neovim-rpc')
+  endif
+  call dein#add('altercation/vim-colors-solarized')
+  call dein#add('VundleVim/Vundle.vim')
+  call dein#add('ctrlpvim/ctrlp.vim')
+  call dein#add('itchyny/lightline.vim')
+  call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
+  call dein#add('dense-analysis/ale')
+  call dein#add('honza/vim-snippets')
+  call dein#add('Yggdroot/indentLine')
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('epilande/vim-react-snippets')
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('leafgarland/typescript-vim')
+  call dein#add('majutsushi/tagbar')
+  call dein#add('tpope/vim-fugitive')
+  " call dein#add('Shougo/neocomplete')  " since neovim does not support lua_based plugin
+  call dein#end()
+  call dein#save_state()
+endif
 
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'itchyny/lightline.vim'
-Plugin 'Shougo/neocomplete'
-Plugin 'w0rp/ale'
-Plugin 'Yggdroot/indentLine'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'honza/vim-snippets'
-Plugin 'SirVer/ultisnips'
-Plugin 'epilande/vim-react-snippets'
-Plugin 'scrooloose/nerdtree'
-Plugin 'majutsushi/tagbar'
-Plugin 'tpope/vim-fugitive'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or jus t:PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
 
 inoremap jk <ESC>
 imap qw jki
@@ -90,7 +92,19 @@ let mapleader = "\<Space>"
 syntax on
 set encoding=utf-8
 
+" coc config
+" Use <C-l> for trigger snippet expand.
+imap <C-e> <Plug>(coc-snippets-expand)
 
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -112,7 +126,6 @@ let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 
 "config for ctrlp
-set rtp+=~/.vim/custom_snippets
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|offline\-module\-cache))$',
@@ -126,13 +139,6 @@ colorscheme solarized
 
 " Relative Row Numbers
 set relativenumber
-
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsListSnippets="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEnableSnipMate = 0
 
 " fix back key not working problem\
 :set backspace=indent,eol,start
@@ -170,7 +176,7 @@ set foldlevel=99
 
 let g:ale_linters = {
 \  'python': ['pylint'],
-\  'javascript': ['flow', 'eslint']
+\  'javascript': ['eslint']
 \}
 
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
@@ -193,6 +199,7 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
 let g:neocomplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup = 1
 inoremap <expr><Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
 
 let g:tagbar_type_javascript = {
@@ -213,7 +220,7 @@ let g:tagbar_type_javascript = {
 \}
 nmap <F8> :TagbarToggle<CR>
 
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
-nmap <C-h> <C-W>h
-nmap <C-l> <C-W>l
+"nmap <C-j> <C-W>j
+"nmap <C-k> <C-W>k
+"nmap <C-h> <C-W>h
+"nmap <C-l> <C-W>l
