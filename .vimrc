@@ -5,7 +5,7 @@ set showmatch " Show matching brackets.
 set modelines=0
 
 " if hidden is not set, TextEdit might fail.
-set hidden
+
 
 " Some servers have issues with backup files, see #649
 set nobackup
@@ -23,7 +23,7 @@ set shortmess+=c
 " always show signcolumns
 set signcolumn=yes
 
-
+set timeoutlen=1000 ttimeoutlen=0
 
 " Automatically wrap text that extends beyond the screen length.
 set wrap
