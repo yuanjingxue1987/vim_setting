@@ -34,7 +34,7 @@ nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-set textwidth=79
+set textwidth=160
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
@@ -71,6 +71,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('neoclide/coc.nvim', {'merge':0, 'rev': 'release'})
   call dein#add('dense-analysis/ale')
   call dein#add('honza/vim-snippets')
+  call dein#add('sheerun/vim-polyglot')
   call dein#add('Yggdroot/indentLine')
   call dein#add('scrooloose/nerdcommenter')
   call dein#add('epilande/vim-react-snippets')
@@ -185,6 +186,7 @@ let g:ale_sign_error = 'X' " could use emoji
 let g:ale_sign_warning = '?' " could use emoji
 let g:ale_statusline_format = ['X %d', '? %d', '']
 let g:ale_open_list = 1
+let g:ale_lint_delay = 5000
 autocmd QuitPre * if empty(&bt) | lclose | endif
 
 " %linter% is the name of the linter that provided the message
