@@ -34,7 +34,7 @@ nnoremap <F2> :set invpaste paste?<CR>
 imap <F2> <C-O>:set invpaste paste?<CR>
 set pastetoggle=<F2>
 
-set textwidth=160
+set textwidth=16000
 set formatoptions=tcqrn1
 set tabstop=4
 set shiftwidth=4
@@ -78,6 +78,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('scrooloose/nerdtree')
   call dein#add('leafgarland/typescript-vim')
   call dein#add('majutsushi/tagbar')
+  call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-fugitive')
   " call dein#add('Shougo/neocomplete')  " since neovim does not support lua_based plugin
   call dein#end()
