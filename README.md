@@ -22,4 +22,9 @@
 8. if cannot find syntac.vim, you need to execute the following command to link it:
     ln -s {local_path_for_the_vim_share_folder}/vim /usr/local/share/vim
     
+## note
+* if you want to remove certain plugin, update in .vimrc and run
+```console
+:call dein#recache_runtimepath()
 
+```
