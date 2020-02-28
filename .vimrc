@@ -79,6 +79,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('majutsushi/tagbar')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('iamcco/markdown-preview.nvim')
+  call dein#add('plasticboy/vim-markdown')
+  call dein#add('junegunn/limelight.vim')
   " call dein#add('Shougo/neocomplete')  " since neovim does not support lua_based plugin
   call dein#end()
   call dein#save_state()
@@ -134,12 +137,13 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 " theme config
-set background=dark
 let g:solarized_termcolors = 256
+set background=dark
 colorscheme solarized
+:highlight Normal ctermbg=NONE
 
 " Relative Row Numbers
-set relativenumber
+set number relativenumber
 
 " fix back key not working problem\
 :set backspace=indent,eol,start
