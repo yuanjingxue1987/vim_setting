@@ -230,3 +230,5 @@ nmap <F8> :TagbarToggle<CR>
 "nmap <C-k> <C-W>k
 "nmap <C-h> <C-W>h
 "nmap <C-l> <C-W>l
+
+let g:limelight_conceal_ctermfg = 240
