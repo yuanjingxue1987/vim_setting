@@ -1,3 +1,6 @@
+"set verbose=9
+"set verbosefile=vimLog.txt
+
 set showcmd " Show (partial) command in status line.
 set showmatch " Show matching brackets.
 
@@ -79,8 +82,9 @@ if dein#load_state('~/.cache/dein')
   call dein#add('majutsushi/tagbar')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-fugitive')
-  call dein#add('iamcco/markdown-preview.nvim')
   call dein#add('plasticboy/vim-markdown')
+  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
+					\ 'build': 'sh -c "cd app & yarn install"' })
   call dein#add('junegunn/limelight.vim')
   " call dein#add('Shougo/neocomplete')  " since neovim does not support lua_based plugin
   call dein#end()
@@ -96,19 +100,8 @@ let mapleader = "\<Space>"
 syntax on
 set encoding=utf-8
 
-" coc config
-" Use <C-l> for trigger snippet expand.
-imap <C-e> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -232,3 +225,4 @@ nmap <F8> :TagbarToggle<CR>
 "nmap <C-l> <C-W>l
 
 let g:limelight_conceal_ctermfg = 240
+
