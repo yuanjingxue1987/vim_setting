@@ -15,6 +15,7 @@
 ```
     ln -s {local_absolute_path_for_the_root_of_this_package}/.vimrc ~/.config/nvim/init.vim
 ```
+7. Check whether current python/python3 local path is current in the .vimrc file
 6. install python3 for deoplete.nvim 
 ```
     brew install python3
@@ -24,6 +25,5 @@
 8. if cannot find syntac.vim, you need to execute the following command to link it:
     ln -s {local_path_for_the_vim_share_folder}/vim /usr/local/share/vim
     
-## note
-* if you want to remove certain plugin, update in .vimrc and remove ~/.cache/dein and follow step 3
-* Do update your python/python3 local path in the vimrc file
+## Update Plugings
+if you want to remove certain plugin, update in .vimrc and remove ~/.cache/dein and follow step 3
