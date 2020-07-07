@@ -190,7 +190,7 @@ autocmd QuitPre * if empty(&bt) | lclose | endif
 " " %s is the error or warning message
 let g:ale_echo_msg_format = '%linter% says %s'
 " " Map keys to navigate between lines with errors and warnings.
-nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>an :ALENextWrap<CR>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 " disable beeping and flashing when error occors
@@ -225,4 +225,8 @@ nmap <F8> :TagbarToggle<CR>
 "nmap <C-l> <C-W>l
 
 let g:limelight_conceal_ctermfg = 240
+autocmd VimEnter * Limelight
 
+set incsearch
+set nohlsearch
+nnoremap <c-h> :set hlsearch!<cr>
