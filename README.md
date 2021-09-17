@@ -1,15 +1,7 @@
 # vim_setting
 1. install neovim ```brew install neovim```
 2. install node ```brew install nodejs```
-2. install yarn ```brew install yarn``` ( for markdown-preview plugin)
-3. install dein for plugin manager:
-```
-    cd ~/Downloads/
-    mkdir dein
-    cd dein
-    curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-    sh ./installer.sh ~/.cache/dein
-```
+3. install yarn ```brew install yarn``` ( for markdown-preview plugin)
 4. create directory ```mkdir -p ~/.config/nvim```
 5. link config files 
 ```
@@ -21,9 +13,16 @@
     brew install python3
     pip3 install pynvim
 ```
-7. install plugins: start neovim, and execute ```:call dein#install()``` to install all the plugins in the config file
+7. install plugins: start neovim, and execute ```:PlugInstall``` to install all the plugins in the config file
 8. if cannot find syntac.vim, you need to execute the following command to link it:
     ln -s {local_path_for_the_vim_share_folder}/vim /usr/local/share/vim
+9. install coc plugins:
+```
+:CocInstall coc-styled-components
+:CocInstall coc-eslint
+:CocInstall coc-prettier
+```
+```
     
 ## Update Plugings
 if you want to remove certain plugin, update in .vimrc and remove ~/.cache/dein and follow step 3

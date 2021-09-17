@@ -40,11 +40,14 @@ set pastetoggle=<F2>
 set textwidth=16000
 set formatoptions=tcqrn1
 set tabstop=4
-set shiftwidth=4
 set softtabstop=4
-set expandtab
+set shiftwidth=4
 set noshiftround
+set expandtab
 set autoindent
+set copyindent
+set smartindent
+set cindent
 " share clipboard
 set clipboard=unnamed
 
@@ -52,45 +55,31 @@ set laststatus=2
 "filetype plugin on
 filetype plugin indent on     " required
 
-if &compatible
-  set nocompatible
-endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-  call dein#add('altercation/vim-colors-solarized')
-  call dein#add('VundleVim/Vundle.vim')
-  call dein#add('ctrlpvim/ctrlp.vim')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('dense-analysis/ale')
-  call dein#add('honza/vim-snippets')
-  call dein#add('sheerun/vim-polyglot')
-  call dein#add('Yggdroot/indentLine')
-  call dein#add('scrooloose/nerdcommenter')
-  call dein#add('epilande/vim-react-snippets')
-  call dein#add('scrooloose/nerdtree')
-  call dein#add('leafgarland/typescript-vim')
-  call dein#add('majutsushi/tagbar')
-  call dein#add('tpope/vim-surround')
-  call dein#add('tpope/vim-fugitive')
-  call dein#add('plasticboy/vim-markdown')
-  call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'],
-					\ 'build': 'sh -c "cd app & yarn install"' })
-  call dein#add('junegunn/limelight.vim')
-  " call dein#add('Shougo/neocomplete')  " since neovim does not support lua_based plugin
-  call dein#end()
-  call dein#save_state()
-endif
-
+call plug#begin(stdpath('data') . '/plugged')
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'altercation/vim-colors-solarized'
+"Plug 'pangloss/vim-javascript'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
+"Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'sheerun/vim-polyglot'
+Plug 'styled-components/vim-styled-components'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-surround'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-rooter'
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-styled-components',
+  \ 'coc-eslint',
+  \ 'coc-pyright',
+  \ 'coc-prettier',
+  \ 'coc-pairs'
+  \ ]
+call plug#end()
 
 inoremap jk <ESC>
 imap qw jki
@@ -101,7 +90,7 @@ syntax on
 set encoding=utf-8
 
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -122,12 +111,8 @@ map <F7> :NERDTreeToggle<CR>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 
-"config for ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\v[\/](\.(git|hg|svn)|(node_modules|offline\-module\-cache))$',
-    \ 'file': '\v\.(exe|so|dll|pyc|DS_STORE)$'
-    \ }
+"config for fzf
+nmap <C-P> :FZF<CR>
 
 " theme config
 let g:solarized_termcolors = 256
@@ -197,7 +182,7 @@ nnoremap <leader>ap :ALEPreviousWrap<cr>
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><Tab>        pumvisible() ? "\<C-n>" : "\<Tab>"
 
@@ -230,3 +215,7 @@ autocmd VimEnter * Limelight
 set incsearch
 set nohlsearch
 nnoremap <c-h> :set hlsearch!<cr>
+
+
+let $NVIM_NODE_LOG_FILE='nvim-node.log'
+let $NVIM_NODE_LOG_LEVEL='warn'
