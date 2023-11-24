@@ -8,10 +8,10 @@
     ln -s {local_absolute_path_for_the_root_of_this_package}/.vimrc ~/.config/nvim/init.vim
 ```
 7. Check whether current python/python3 local path is current in the .vimrc file
-6. install python3 for deoplete.nvim 
+6. add plug.vim to autoload folder
 ```
-    brew install python3
-    pip3 install pynvim
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 7. install plugins: start neovim, and execute ```:PlugInstall``` to install all the plugins in the config file
 8. if cannot find syntac.vim, you need to execute the following command to link it:
@@ -20,9 +20,4 @@
 ```
 :CocInstall coc-styled-components
 :CocInstall coc-eslint
-:CocInstall coc-prettier
 ```
-```
-    
-## Update Plugings
-if you want to remove certain plugin, update in .vimrc and remove ~/.cache/dein and follow step 3

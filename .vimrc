@@ -39,9 +39,9 @@ set pastetoggle=<F2>
 
 set textwidth=16000
 set formatoptions=tcqrn1
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set noshiftround
 set expandtab
 set autoindent
@@ -76,8 +76,7 @@ let g:coc_global_extensions = [
   \ 'coc-styled-components',
   \ 'coc-eslint',
   \ 'coc-pyright',
-  \ 'coc-prettier',
-  \ 'coc-pairs'
+  \ 'coc-json'
   \ ]
 call plug#end()
 
@@ -159,7 +158,8 @@ set foldlevel=99
 
 let g:ale_linters = {
 \  'python': ['pylint'],
-\  'javascript': ['eslint']
+\  'javascript': ['eslint'],
+\  'json': ['eslint']
 \}
 
 highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
@@ -219,3 +219,5 @@ nnoremap <c-h> :set hlsearch!<cr>
 
 let $NVIM_NODE_LOG_FILE='nvim-node.log'
 let $NVIM_NODE_LOG_LEVEL='warn'
+
+set notermguicolors
