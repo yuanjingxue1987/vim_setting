@@ -89,7 +89,7 @@ syntax on
 set encoding=utf-8
 
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/Users/yuanjingxue/miniconda3/bin/python3'
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -221,3 +221,7 @@ let $NVIM_NODE_LOG_FILE='nvim-node.log'
 let $NVIM_NODE_LOG_LEVEL='warn'
 
 set notermguicolors
+
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
