@@ -64,7 +64,8 @@ Plug 'altercation/vim-colors-solarized'
 "Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'sheerun/vim-polyglot'
 Plug 'styled-components/vim-styled-components'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/limelight.vim'
 Plug 'Yggdroot/indentLine'
 Plug 'scrooloose/nerdcommenter'
@@ -89,7 +90,7 @@ syntax on
 set encoding=utf-8
 
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/Users/yuanjingxue/miniconda3/bin/python3'
+let g:python3_host_prog = 'python3'
 
 "config for syntastic
 "set statusline+=%#warningmsg#
@@ -131,28 +132,6 @@ let g:indentLine_char = '|'
 " copy paste across vim instance
 vmap <silent> ,y :w! /tmp/vitmp<CR>                                                                   
 nmap <silent> ,p :r! cat /tmp/vitmp<CR>
-
-" config for lightline
-let g:lightline = {
-  \   'colorscheme': 'solarized',
-  \   'active': {
-  \     'left':[ [ 'mode', 'paste' ],
-  \              [ 'gitbranch', 'readonly', 'filename', 'modified' ]
-  \     ]
-  \   },
-	\   'component': {
-	\     'lineinfo': '▸%3l:%-2v',
-	\   },
-  \   'component_function': {
-  \     'gitbranch': 'fugitive#head',
-  \   }
-  \ }
-let g:lightline.separator = {
-	\   'left': '▸', 'right': '▸'
-  \}
-let g:lightline.subseparator = {
-	\   'left': '▸', 'right': '▸' 
-  \}
 
 set foldlevel=99 
 
@@ -221,6 +200,35 @@ let $NVIM_NODE_LOG_FILE='nvim-node.log'
 let $NVIM_NODE_LOG_LEVEL='warn'
 
 set notermguicolors
+
+let g:airline#extensions#tabline#enabled = 1 " Enable the list of buffers
+let g:airline#extensions#tabline#formatter = 'default'  " f/p/file-name.js
+let g:airline#extensions#tabline#formatter = 'jsformatter' " path-to/f
+let g:airline#extensions#tabline#formatter = 'unique_tail' " file-name.js
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved' " f/p/file-name.js
+" Note: You must define the dictionary first before setting values.
+" Also, it's a good idea to check whether it exists as to avoid
+" accidentally overwriting its contents.
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ' line:'
+let g:airline_symbols.maxlinenr = ''
+let g:airline_symbols.dirty='⚡'
+"let g:airline_theme='base16'
+
+" If you only see boxes here it may be because your system doesn't have
+" the correct fonts. Try it in vim first and if that fails see the help
+" pages for vim-airline :help airline-troubleshooting
 
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
